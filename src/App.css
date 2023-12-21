@@ -44,6 +44,8 @@ body {
   background-color: var(--sideBar-color);
   color: var(--text-color);
   transition: var(--tran-05);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar.close {
@@ -99,18 +101,17 @@ header .image-text .header-text {
 .sidebar header .toggle {
   position: absolute;
   top: 50%;
-  right: -25px;
+  right: -10px;
   transform: translateY(-50%) rotate(180deg);
   height: 25px;
   width: 25px;
-  font-size: 22px;
-  color: var(--sideBar-color);
-  background-color: var(--primary-color);
-  border-radius: 50%;
+  font-size: 30px;
+  color: var(--primary-color);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  z-index: 100;
 }
 
 .sidebar.close header .toggle {
@@ -118,7 +119,7 @@ header .image-text .header-text {
 }
 
 .sidebar .nav-link {
-  height: 220px;
+  height: 50px;
   margin-top: 10px;
   list-style: none;
   display: flex;
@@ -127,7 +128,7 @@ header .image-text .header-text {
 }
 
 .sidebar .nav-link.open {
-  height: 50px;
+  height: 240px;
 }
 
 .sidebar .nav-link .icon {
@@ -146,11 +147,12 @@ header .image-text .header-text {
   font-size: 20px;
   color: var(--text-color);
   transition: var(--tran-02);
-  transform: rotate(180deg);
+  transform: rotate(0deg);
+  margin-left: auto;
 }
 
 .sidebar .nav-link.open .icon-2 {
-  transform: rotate(0deg);
+  transform: rotate(180deg);
 }
 
 .sidebar .nav-link .icon,
@@ -171,6 +173,11 @@ header .image-text .header-text {
   transition: var(--trans-04);
   overflow: hidden;
 }
+
+.sidebar .nav-link.open a {
+  overflow-y: auto;
+}
+
 
 .sidebar .nav-link a .details {
   width: 100%;
@@ -212,7 +219,7 @@ header .image-text .header-text {
   margin: 0.5rem 0;
 }
 
-.sub-menu input {
+.styled-input {
   height: 100%;
   width: 90%;
   margin: 0 auto;
@@ -225,4 +232,65 @@ header .image-text .header-text {
   border: 1px solid var(--primary-color);
   font-size: 16px;
   font-weight: 500;
+}
+
+/* Skills section */
+
+.skills-section {
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.skill-box {
+  margin: 0.5rem;
+  width: 90%;
+  display: flex;
+}
+
+.skill-box input{
+  height: 2rem;
+  margin: 0 0.5rem 0 0;
+}
+
+.skill-box button{
+  width: 4rem;
+  height: 2rem;
+  font-size: 12px;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+}
+
+.add-skill {
+  width: 7rem;
+  height: 2rem;
+  font-size: 14px;
+  background-color: var(--body-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  color: var(--primary-color);
+}
+
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 10px;
 }

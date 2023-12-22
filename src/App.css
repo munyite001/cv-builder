@@ -208,6 +208,7 @@ header .image-text .header-text {
 .sidebar .nav-link a .details {
   width: 100%;
   display: flex;
+  margin-bottom: 1rem;
 
 }
 
@@ -314,11 +315,15 @@ header .image-text .header-text {
 
 .info-section {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .info-box {
   width: 100%;
-  margin: 1rem auto;
+  margin: 0.5rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -381,7 +386,54 @@ header .image-text .header-text {
 
 .edit-modal {
   width: 400px;
-  height: 450px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: var(--sideBar-color);
   border-radius: 6px;
+  padding: 1rem;
+  
+}
+
+.modal-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-header i {
+  margin: 0 0.5rem 0 auto;
+  font-size: 25px;
+}
+
+.modal-body {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.form-group {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  height: 2rem;
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  background-color: var(--body-color);
+  color: #000;
+}
+
+.form-group textarea {
+  height: 5rem;
 }

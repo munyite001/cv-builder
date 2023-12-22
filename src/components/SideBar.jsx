@@ -9,7 +9,8 @@ export default function SideBar()
     const [openNavLink2, setOpenNavLink2] = useState(false);
     const [openNavLink3, setOpenNavLink3] = useState(false);
     const [openNavLink4, setOpenNavLink4] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);
+    const [showExpModal, setShowExpModal] = useState(false);
+    const [showEduModal, setShowEduModal] = useState(false);
     const [skills, setSkills] = useState(["HTML", "CSS", "JavaScript"]);
     const [experiences, setExperiences] = useState([
         {
@@ -30,6 +31,14 @@ export default function SideBar()
         }
     ]);
 
+    const [experienceFormData, setExperienceFormData] = useState({
+        jobTitle: "",
+        company: "",
+        startDate: "",
+        endDate: "",
+        description: ""
+    });
+
     const [educations, setEducations] = useState([
         {
             schoolName: "Lily Academy",
@@ -39,7 +48,49 @@ export default function SideBar()
             description: "I attended primary eductaion at lily academy",
         
         }]);
+    const [educationsFormData, setEducationsFormData] = useState([
+        {
+            schoolName: "",
+            location: "",
+            startDate: "",
+            endDate: "",
+            description: "",
+        
+        }]);
 
+    const handleExperienceFormChange = (event) => {
+        const { name, value } = event.target;
+        setExperienceFormData({ ...experienceFormData, [name]: value });
+    };
+    const handleEducationsFormChange = (event) => {
+        const { name, value } = event.target;
+        setEducationsFormData({ ...educationsFormData, [name]: value });
+    };
+
+    const handleAddExperience = () => {
+        setExperiences([...experiences, experienceFormData]);
+        // Clear the form data after adding the experience
+        setExperienceFormData({
+            jobTitle: "",
+            company: "",
+            startDate: "",
+            endDate: "",
+            description: ""
+        });
+        setShowExpModal(false);
+    }
+    const handleAddEducation = () => {
+        setEducations([...educations, educationsFormData]);
+        // Clear the form data after adding the education
+        setEducationsFormData({
+            schoolName: "",
+            location: "",
+            startDate: "",
+            endDate: "",
+            description: "",
+        });
+        setShowEduModal(false);
+    }
 
     const handleToggle = () => {
         setToggle(!toggle);
@@ -79,6 +130,16 @@ export default function SideBar()
         updatedSkills[index] = event.target.value;
         setSkills(updatedSkills);
     };
+
+    const handleRemoveExperience = (index) => {
+        const updatedExperiences = experiences.filter((exp, i) => i !== index);
+        setExperiences(updatedExperiences);
+    }
+
+    const handleRemoveEducation = (index) => {
+        const updatedEducations = educations.filter((edu, i) => i !== index);
+        setEducations(updatedEducations);
+    }
 
 
     return(
@@ -184,15 +245,16 @@ export default function SideBar()
                                             <div className="info-box" key={index}>
                                                 <div className="info-title">
                                                     <span>{index + 1}</span>
-                                                    <p>{experience.jobTitle.slice(0,6)}...</p>
+                                                    <p>{experience.jobTitle.slice(0,5)}...</p>
                                                 </div>
                                                 <div className="control-btns">
                                                     <button className="btn">Edit</button>
-                                                    <button className="btn">Remove</button>
+                                                    <button className="btn" onClick={() => handleRemoveExperience(index) }>Remove</button>
                                                 </div>
                                             </div>
                                         )
                                     })}
+                                    <button className="btn-2" onClick={() => setShowExpModal(true)}>Add</button>
                                 </div>
                             </a>
                         </li>
@@ -210,21 +272,160 @@ export default function SideBar()
                                             <div className="info-box" key={index}>
                                                 <div className="info-title">
                                                     <span>{index + 1}</span>
-                                                    <p>{education.schoolName.slice(0,6)}...</p>
+                                                    <p>{education.schoolName.slice(0,5)}...</p>
                                                 </div>
                                                 <div className="control-btns">
                                                     <button className="btn">Edit</button>
-                                                    <button className="btn">Remove</button>
+                                                    <button className="btn" onClick={() => handleRemoveEducation(index)}>Remove</button>
                                                 </div>
                                             </div>
                                         )
                                     })}
+                                    <button className="btn-2" onClick={() => setShowEduModal(true)}>Add</button>
                                 </div>
                             </a>
                         </li>
                     </ul>
-                    {showEditModal && (<div className="overlay">
-                        <div className="edit-modal"></div>
+                    {showExpModal && (<div className="overlay">
+                        <div className="edit-modal">
+                            <div className="modal-header">
+                                <h3>Add Experience</h3>
+                                <i className='bx bx-x' onClick={() => setShowExpModal(false)}></i>
+                            </div>
+                            <div className="modal-body">
+                                <form>
+                                    <div className="form-group">
+                                        <label htmlFor="jobTitle">Job Title</label>
+                                        <input 
+                                            type="text" 
+                                            name="jobTitle" 
+                                            id="jobTitle" 
+                                            className="styled-input"
+                                            value={experienceFormData.jobTitle}
+                                            onChange={handleExperienceFormChange} 
+                                            required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="company">Company</label>
+                                        <input 
+                                            type="text" 
+                                            name="company" 
+                                            id="company" 
+                                            className="styled-input" 
+                                            value={experienceFormData.company}
+                                            onChange={handleExperienceFormChange}
+                                            required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="startDate">Start Date</label>
+                                        <input 
+                                            type="date" 
+                                            name="startDate" 
+                                            id="startDate" 
+                                            className="styled-input" 
+                                            value={experienceFormData.startDate}
+                                            onChange={handleExperienceFormChange}
+                                            required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="endDate">End Date</label>
+                                        <input 
+                                            type="date" 
+                                            name="endDate" 
+                                            id="endDate" 
+                                            className="styled-input" 
+                                            value={experienceFormData.endDate}
+                                            onChange={handleExperienceFormChange}
+                                            required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="description">Description</label>
+                                        <textarea 
+                                            name="description" 
+                                            id="description" 
+                                            className="styled-input" 
+                                            value={experienceFormData.description}
+                                            onChange={handleExperienceFormChange}
+                                            required>
+
+                                            </textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="submit" className="btn-2" onClick={handleAddExperience}>Add</button>
+                            </div>
+                        </div>
+                    </div>)}
+                    {showEduModal && (<div className="overlay">
+                        <div className="edit-modal">
+                            <div className="modal-header">
+                                <h3>Add Education</h3>
+                                <i className='bx bx-x' onClick={() => setShowEduModal(false)}></i>
+                            </div>
+                            <div className="modal-body">
+                                <form>
+                                    <div className="form-group">
+                                        <label htmlFor="schoolName">School Name</label>
+                                        <input 
+                                            type="text" 
+                                            name="schoolName" 
+                                            id="schoolName" 
+                                            className="styled-input"
+                                            value={educationsFormData.schoolName}
+                                            onChange={handleEducationsFormChange} 
+                                            required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="location">Location</label>
+                                        <input 
+                                            type="text" 
+                                            name="location" 
+                                            id="location" 
+                                            className="styled-input" 
+                                            value={educationsFormData.location}
+                                            onChange={handleEducationsFormChange}
+                                            required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="startDate">Start Date</label>
+                                        <input 
+                                            type="date" 
+                                            name="startDate" 
+                                            id="startDate"
+                                            className="styled-input" 
+                                            value={educationsFormData.startDate}
+                                            onChange={handleEducationsFormChange}
+                                            required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="endDate">End Date</label>
+                                        <input 
+                                            type="date" 
+                                            name="endDate" 
+                                            id="endDate" 
+                                            className="styled-input" 
+                                            value={educationsFormData.endDate}
+                                            onChange={handleEducationsFormChange}
+                                            required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="description">Description</label>
+                                        <textarea 
+                                            name="description" 
+                                            id="description" 
+                                            className="styled-input" 
+                                            value={educationsFormData.description}
+                                            onChange={handleEducationsFormChange}
+                                            required>
+                                        </textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="submit" className="btn-2" onClick={handleAddEducation}>Add</button>
+                            </div>
+                        </div>
                     </div>)}
                 </div>
             </div>

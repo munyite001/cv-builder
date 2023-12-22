@@ -7,20 +7,46 @@ export default function SideBar()
     const [toggle, setToggle] = useState(false);
     const [openNavLink1, setOpenNavLink1] = useState(false);
     const [openNavLink2, setOpenNavLink2] = useState(false);
+    const [openNavLink3, setOpenNavLink3] = useState(false);
+    const [openNavLink4, setOpenNavLink4] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [skills, setSkills] = useState(["HTML", "CSS", "JavaScript"]);
     const [experiences, setExperiences] = useState([
         {
-            jobTitle: "",
-            company: "",
-            startDate: "",
-            endDate: "",
-            description: ""
+            jobTitle: "Web Developer",
+            company: "ABC",
+            startDate: "2023 January",
+            endDate: "2023 December",
+            description: "I worked as a web developer"
+        
+        },
+        {
+            jobTitle: "Web Designer",
+            company: "Microsoft",
+            startDate: "2022 January",
+            endDate: "2022 December",
+            description: "I worked as a web designer"
+        
+        }
+    ]);
+
+    const [educations, setEducations] = useState([
+        {
+            schoolName: "Lily Academy",
+            location: "Nairobi",
+            startDate: "2005 January",
+            endDate: "2013 December",
+            description: "I attended primary eductaion at lily academy",
         
         }]);
 
 
     const handleToggle = () => {
         setToggle(!toggle);
+        setOpenNavLink1(false);
+        setOpenNavLink2(false);
+        setOpenNavLink3(false);
+        setOpenNavLink4(false);
     }
 
     const handleOpenNavLink1 = () => {
@@ -29,6 +55,14 @@ export default function SideBar()
 
     const handleOpenNavLink2 = () => {
         setOpenNavLink2(!openNavLink2);
+    }
+
+    const handleOpenNavLink3 = () => {
+        setOpenNavLink3(!openNavLink3);
+    }
+
+    const handleOpenNavLink4 = () => {
+        setOpenNavLink4(!openNavLink4);
     }
 
     const handleAddSkill = () => {
@@ -45,6 +79,7 @@ export default function SideBar()
         updatedSkills[index] = event.target.value;
         setSkills(updatedSkills);
     };
+
 
     return(
         <nav className={toggle ? "sidebar close" : "sidebar"}>
@@ -128,14 +163,69 @@ export default function SideBar()
                                                 placeholder="Enter a skill"
                                                 className="styled-input"
                                             />
-                                            <button onClick={() => handleRemoveSkill(index)}>Remove</button>
+                                            <button className="btn" onClick={() => handleRemoveSkill(index)}>Remove</button>
                                         </div>
                                     ))}
-                                <button className="add-skill" onClick={handleAddSkill}>Add Skill</button>
+                                    <button className="btn-2" onClick={handleAddSkill}>Add Skill</button>
                             </div>
                             </a>
                         </li>
+                        <li className={openNavLink3 ? "nav-link open" : "nav-link"}>
+                            <a href="#">
+                                <div className="details">
+                                    <i className='bx bxs-time icon'></i>
+                                    <span className="text nav-text">Experience</span>
+                                    <i className='bx bxs-chevron-down icon-2' onClick={handleOpenNavLink3}></i>
+                                </div>
+                                <div className="info-section">
+                                    {/* Create a modal for adding experiences */}
+                                    {experiences.map((experience, index) => {
+                                        return(
+                                            <div className="info-box" key={index}>
+                                                <div className="info-title">
+                                                    <span>{index + 1}</span>
+                                                    <p>{experience.jobTitle.slice(0,6)}...</p>
+                                                </div>
+                                                <div className="control-btns">
+                                                    <button className="btn">Edit</button>
+                                                    <button className="btn">Remove</button>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </a>
+                        </li>
+                        <li className={openNavLink4 ? "nav-link open" : "nav-link"}>
+                            <a href="#">
+                                <div className="details">
+                                    <i className='bx bxs-book-reader icon'></i>
+                                    <span className="text nav-text">Education</span>
+                                    <i className='bx bxs-chevron-down icon-2' onClick={handleOpenNavLink4}></i>
+                                </div>
+                                <div className="info-section">
+                                    {/* Create a modal for adding education */}
+                                    {educations.map((education, index) => {
+                                        return(
+                                            <div className="info-box" key={index}>
+                                                <div className="info-title">
+                                                    <span>{index + 1}</span>
+                                                    <p>{education.schoolName.slice(0,6)}...</p>
+                                                </div>
+                                                <div className="control-btns">
+                                                    <button className="btn">Edit</button>
+                                                    <button className="btn">Remove</button>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </a>
+                        </li>
                     </ul>
+                    {showEditModal && (<div className="overlay">
+                        <div className="edit-modal"></div>
+                    </div>)}
                 </div>
             </div>
         </nav>

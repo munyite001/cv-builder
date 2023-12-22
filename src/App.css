@@ -27,12 +27,38 @@
   font-size: 16px;
   line-height: 1.5;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--body-color);
 }
+
+.app {
+  width: 100%;
+  height: 100%;
+}
+
+.preview-container {
+  margin-left: auto;
+  width: calc(100% - 250px);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow-y: scroll;
+}
+
+.preview-container .resume-document {
+  width: 794px;
+  height: 1123px;
+  background-color: #FFF;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+}
+
 
 .sidebar {
   position: fixed;
@@ -234,6 +260,12 @@ header .image-text .header-text {
   font-weight: 500;
 }
 
+.styled-input::placeholder {
+  font-weight: 100;
+  opacity: 0.4;
+
+}
+
 /* Skills section */
 
 .skills-section {
@@ -255,7 +287,7 @@ header .image-text .header-text {
   margin: 0 0.5rem 0 0;
 }
 
-.skill-box button{
+.btn{
   width: 4rem;
   height: 2rem;
   font-size: 12px;
@@ -267,7 +299,7 @@ header .image-text .header-text {
   border: none;
 }
 
-.add-skill {
+.btn-2 {
   width: 7rem;
   height: 2rem;
   font-size: 14px;
@@ -278,6 +310,45 @@ header .image-text .header-text {
   outline: none;
   border: none;
   color: var(--primary-color);
+}
+
+.info-section {
+  width: 100%;
+}
+
+.info-box {
+  width: 100%;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-title {
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-title span {
+  margin: 0 0.5rem;
+}
+
+.control-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+
+
+.control-btns .btn {
+  width: 3rem;
+  height: 1.5rem;
+  font-size: 10px;
+  margin: 0.5rem;
 }
 
 /* CUSTOM SCROLLBAR */
@@ -293,4 +364,24 @@ header .image-text .header-text {
 ::-webkit-scrollbar-thumb {
   background-color: var(--primary-color);
   border-radius: 10px;
+}
+
+/* EDIT MODAL */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+}
+
+.edit-modal {
+  width: 400px;
+  height: 450px;
+  background-color: var(--sideBar-color);
+  border-radius: 6px;
 }

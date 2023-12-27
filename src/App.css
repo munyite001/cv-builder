@@ -57,6 +57,9 @@ body {
   background-color: #FFF;
   border-radius: 5px;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+  padding: 4rem;
+  color: rgba(0,0,0,0.5);
+  font-weight: 400;
 }
 
 
@@ -190,7 +193,7 @@ header .image-text .header-text {
 .sidebar .nav-link a {
   height: 100%;
   width: 100%;
-  padding: 1rem 0 0;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -436,4 +439,45 @@ header .image-text .header-text {
 
 .form-group textarea {
   height: 5rem;
+}
+
+.resume-document hr {
+  width: 100%;
+  height: 0.5rem;
+  outline: none;
+  border: none;
+  background-color: rgb(87,186,134)
+
+}
+
+.resume-document .resume-intro {
+  width: 100%;
+  margin: 2rem 0;
+  color: var(--sideBar-color);
+}
+
+.resume-intro h1 {
+  font-weight: 500;
+  font-size: 40px;
+}
+
+.resume-intro h2 {
+  font-weight: 400;
+  color: rgb(17,176,81);
+  margin: 0 0.5rem;
+}
+.resume-intro p {
+  font-weight: 300;
+  margin: 0 0.5rem;
+  color: rgba(0,0,0,0.5);
+}
+
+.resume-document .user-skills {
+  width: 100%;
+  margin: 2rem 0.5rem;
+}
+
+.section-intro {
+  color: rgb(17,176,81);
+  font-weight: 500;
 }

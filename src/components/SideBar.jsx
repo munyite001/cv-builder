@@ -1,9 +1,12 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import logo from "../assets/logo.png";
 
-// eslint-disable-next-line react/prop-types
-export default function SideBar()
+export default function SideBar(props)
 {
+
+    const {name, role, phone, address, email} = props.personalInfo;
+    const {skills} = props;
     const [toggle, setToggle] = useState(false);
     const [openNavLink1, setOpenNavLink1] = useState(false);
     const [openNavLink2, setOpenNavLink2] = useState(false);
@@ -11,25 +14,7 @@ export default function SideBar()
     const [openNavLink4, setOpenNavLink4] = useState(false);
     const [showExpModal, setShowExpModal] = useState(false);
     const [showEduModal, setShowEduModal] = useState(false);
-    const [skills, setSkills] = useState(["HTML", "CSS", "JavaScript"]);
-    const [experiences, setExperiences] = useState([
-        {
-            jobTitle: "Web Developer",
-            company: "ABC",
-            startDate: "2023 January",
-            endDate: "2023 December",
-            description: "I worked as a web developer"
-        
-        },
-        {
-            jobTitle: "Web Designer",
-            company: "Microsoft",
-            startDate: "2022 January",
-            endDate: "2022 December",
-            description: "I worked as a web designer"
-        
-        }
-    ]);
+    const [experiences, setExperiences] = useState([]);
 
     const [experienceFormData, setExperienceFormData] = useState({
         jobTitle: "",
@@ -39,15 +24,7 @@ export default function SideBar()
         description: ""
     });
 
-    const [educations, setEducations] = useState([
-        {
-            schoolName: "Lily Academy",
-            location: "Nairobi",
-            startDate: "2005 January",
-            endDate: "2013 December",
-            description: "I attended primary eductaion at lily academy",
-        
-        }]);
+    const [educations, setEducations] = useState([]);
     const [educationsFormData, setEducationsFormData] = useState([
         {
             schoolName: "",
@@ -116,20 +93,7 @@ export default function SideBar()
         setOpenNavLink4(!openNavLink4);
     }
 
-    const handleAddSkill = () => {
-        setSkills([...skills, ""]);
-    };
-
-    const handleRemoveSkill = (index) => {
-        const updatedSkills = skills.filter((_, i) => i !== index);
-        setSkills(updatedSkills);
-    };
-
-    const handleSkillChange = (index, event) => {
-        const updatedSkills = [...skills];
-        updatedSkills[index] = event.target.value;
-        setSkills(updatedSkills);
-    };
+    
 
     const handleRemoveExperience = (index) => {
         const updatedExperiences = experiences.filter((exp, i) => i !== index);
@@ -178,14 +142,18 @@ export default function SideBar()
                                             name="name"
                                             placeholder="Full Name"
                                             className="styled-input"
+                                            value={name}
+                                            onChange={(e) => props.handleChange(e) }
                                         />
                                     </li>
                                     <li className="sub-menu-link">
                                         <input 
                                             type="text" 
-                                            name="phone number"
+                                            name="phone"
                                             placeholder="Phone No"
                                             className="styled-input"
+                                            value={phone}
+                                            onChange={(e) => props.handleChange(e) }
                                         />
                                     </li>
                                     <li className="sub-menu-link">
@@ -194,6 +162,8 @@ export default function SideBar()
                                             name="email"
                                             placeholder="email"
                                             className="styled-input"
+                                            value={email}
+                                            onChange={(e) => props.handleChange(e) }
                                         />
                                     </li>
                                     <li className="sub-menu-link">
@@ -202,6 +172,18 @@ export default function SideBar()
                                             name="address"
                                             placeholder="Address"
                                             className="styled-input"
+                                            value={address}
+                                            onChange={(e) => props.handleChange(e) }
+                                        />
+                                    </li>
+                                    <li className="sub-menu-link">
+                                        <input 
+                                            type="text" 
+                                            name="role"
+                                            placeholder="profession"
+                                            className="styled-input"
+                                            value={role}
+                                            onChange={(e) => props.handleChange(e) }
                                         />
                                     </li>
                                 </ul>
@@ -220,14 +202,14 @@ export default function SideBar()
                                             <input
                                                 type="text"
                                                 value={skill}
-                                                onChange={(e) => handleSkillChange(index, e)}
+                                                onChange={(e) => props.handleSkillChange(index, e)}
                                                 placeholder="Enter a skill"
                                                 className="styled-input"
                                             />
-                                            <button className="btn" onClick={() => handleRemoveSkill(index)}>Remove</button>
+                                            <button className="btn" onClick={() => props.handleRemoveSkill(index)}>Remove</button>
                                         </div>
                                     ))}
-                                    <button className="btn-2" onClick={handleAddSkill}>Add Skill</button>
+                                    <button className="btn-2" onClick={props.handleAddSkill}>Add Skill</button>
                             </div>
                             </a>
                         </li>

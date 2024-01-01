@@ -481,3 +481,26 @@ header .image-text .header-text {
   color: rgb(17,176,81);
   font-weight: 500;
 }
+
+.resume-exp-box {
+  margin: 1rem;
+  color: var(--sideBar-color);
+}
+
+.resume-exp-box-title {
+  display: flex;
+  align-items: center;
+}
+
+.resume-exp-box h3 {
+  font-size: 20px;
+  margin: 0 0.5rem;
+}
+
+.resume-exp-box-title p {
+  margin: 0 0.5rem;
+}
+
+.resume-exp-box p:nth-child(2) {
+  color: rgba(0,0,0,0.5);
+}

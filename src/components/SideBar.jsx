@@ -7,67 +7,13 @@ export default function SideBar(props)
 
     const {name, role, phone, address, email} = props.personalInfo;
     const {skills} = props;
+    
     const [toggle, setToggle] = useState(false);
     const [openNavLink1, setOpenNavLink1] = useState(false);
     const [openNavLink2, setOpenNavLink2] = useState(false);
     const [openNavLink3, setOpenNavLink3] = useState(false);
     const [openNavLink4, setOpenNavLink4] = useState(false);
-    const [showExpModal, setShowExpModal] = useState(false);
-    const [showEduModal, setShowEduModal] = useState(false);
-    const [experiences, setExperiences] = useState([]);
-
-    const [experienceFormData, setExperienceFormData] = useState({
-        jobTitle: "",
-        company: "",
-        startDate: "",
-        endDate: "",
-        description: ""
-    });
-
-    const [educations, setEducations] = useState([]);
-    const [educationsFormData, setEducationsFormData] = useState([
-        {
-            schoolName: "",
-            location: "",
-            startDate: "",
-            endDate: "",
-            description: "",
-        
-        }]);
-
-    const handleExperienceFormChange = (event) => {
-        const { name, value } = event.target;
-        setExperienceFormData({ ...experienceFormData, [name]: value });
-    };
-    const handleEducationsFormChange = (event) => {
-        const { name, value } = event.target;
-        setEducationsFormData({ ...educationsFormData, [name]: value });
-    };
-
-    const handleAddExperience = () => {
-        setExperiences([...experiences, experienceFormData]);
-        // Clear the form data after adding the experience
-        setExperienceFormData({
-            jobTitle: "",
-            company: "",
-            startDate: "",
-            endDate: "",
-            description: ""
-        });
-        setShowExpModal(false);
-    }
-    const handleAddEducation = () => {
-        setEducations([...educations, educationsFormData]);
-        // Clear the form data after adding the education
-        setEducationsFormData({
-            schoolName: "",
-            location: "",
-            startDate: "",
-            endDate: "",
-            description: "",
-        });
-        setShowEduModal(false);
-    }
+    
 
     const handleToggle = () => {
         setToggle(!toggle);
@@ -92,19 +38,6 @@ export default function SideBar(props)
     const handleOpenNavLink4 = () => {
         setOpenNavLink4(!openNavLink4);
     }
-
-    
-
-    const handleRemoveExperience = (index) => {
-        const updatedExperiences = experiences.filter((exp, i) => i !== index);
-        setExperiences(updatedExperiences);
-    }
-
-    const handleRemoveEducation = (index) => {
-        const updatedEducations = educations.filter((edu, i) => i !== index);
-        setEducations(updatedEducations);
-    }
-
 
     return(
         <nav className={toggle ? "sidebar close" : "sidebar"}>
@@ -221,8 +154,7 @@ export default function SideBar(props)
                                     <i className='bx bxs-chevron-down icon-2' onClick={handleOpenNavLink3}></i>
                                 </div>
                                 <div className="info-section">
-                                    {/* Create a modal for adding experiences */}
-                                    {experiences.map((experience, index) => {
+                                    {props.experiences.map((experience, index) => {
                                         return(
                                             <div className="info-box" key={index}>
                                                 <div className="info-title">
@@ -231,12 +163,12 @@ export default function SideBar(props)
                                                 </div>
                                                 <div className="control-btns">
                                                     <button className="btn">Edit</button>
-                                                    <button className="btn" onClick={() => handleRemoveExperience(index) }>Remove</button>
+                                                    <button className="btn" onClick={() => props.handleRemoveExperience(index) }>Remove</button>
                                                 </div>
                                             </div>
                                         )
                                     })}
-                                    <button className="btn-2" onClick={() => setShowExpModal(true)}>Add</button>
+                                    <button className="btn-2" onClick={() => props.setShowExpModal(true)}>Add</button>
                                 </div>
                             </a>
                         </li>
@@ -249,7 +181,7 @@ export default function SideBar(props)
                                 </div>
                                 <div className="info-section">
                                     {/* Create a modal for adding education */}
-                                    {educations.map((education, index) => {
+                                    {props.educations.map((education, index) => {
                                         return(
                                             <div className="info-box" key={index}>
                                                 <div className="info-title">
@@ -258,21 +190,21 @@ export default function SideBar(props)
                                                 </div>
                                                 <div className="control-btns">
                                                     <button className="btn">Edit</button>
-                                                    <button className="btn" onClick={() => handleRemoveEducation(index)}>Remove</button>
+                                                    <button className="btn" onClick={() => props.handleRemoveEducation(index)}>Remove</button>
                                                 </div>
                                             </div>
                                         )
                                     })}
-                                    <button className="btn-2" onClick={() => setShowEduModal(true)}>Add</button>
+                                    <button className="btn-2" onClick={() => props.setShowEduModal(true)}>Add</button>
                                 </div>
                             </a>
                         </li>
                     </ul>
-                    {showExpModal && (<div className="overlay">
+                    {props.showExpModal && (<div className="overlay">
                         <div className="edit-modal">
                             <div className="modal-header">
                                 <h3>Add Experience</h3>
-                                <i className='bx bx-x' onClick={() => setShowExpModal(false)}></i>
+                                <i className='bx bx-x' onClick={() => props.setShowExpModal(false)}></i>
                             </div>
                             <div className="modal-body">
                                 <form>
@@ -283,8 +215,8 @@ export default function SideBar(props)
                                             name="jobTitle" 
                                             id="jobTitle" 
                                             className="styled-input"
-                                            value={experienceFormData.jobTitle}
-                                            onChange={handleExperienceFormChange} 
+                                            value={props.experienceFormData.jobTitle}
+                                            onChange={props.handleExperienceFormChange} 
                                             required/>
                                     </div>
                                     <div className="form-group">
@@ -294,8 +226,8 @@ export default function SideBar(props)
                                             name="company" 
                                             id="company" 
                                             className="styled-input" 
-                                            value={experienceFormData.company}
-                                            onChange={handleExperienceFormChange}
+                                            value={props.experienceFormData.company}
+                                            onChange={props.handleExperienceFormChange}
                                             required/>
                                     </div>
                                     <div className="form-group">
@@ -305,8 +237,8 @@ export default function SideBar(props)
                                             name="startDate" 
                                             id="startDate" 
                                             className="styled-input" 
-                                            value={experienceFormData.startDate}
-                                            onChange={handleExperienceFormChange}
+                                            value={props.experienceFormData.startDate}
+                                            onChange={props.handleExperienceFormChange}
                                             required/>
                                     </div>
                                     <div className="form-group">
@@ -316,8 +248,8 @@ export default function SideBar(props)
                                             name="endDate" 
                                             id="endDate" 
                                             className="styled-input" 
-                                            value={experienceFormData.endDate}
-                                            onChange={handleExperienceFormChange}
+                                            value={props.experienceFormData.endDate}
+                                            onChange={props.handleExperienceFormChange}
                                             required/>
                                     </div>
                                     <div className="form-group">
@@ -326,8 +258,8 @@ export default function SideBar(props)
                                             name="description" 
                                             id="description" 
                                             className="styled-input" 
-                                            value={experienceFormData.description}
-                                            onChange={handleExperienceFormChange}
+                                            value={props.experienceFormData.description}
+                                            onChange={props.handleExperienceFormChange}
                                             required>
 
                                             </textarea>
@@ -335,15 +267,15 @@ export default function SideBar(props)
                                 </form>
                             </div>
                             <div className="modal-footer">
-                                <button type="submit" className="btn-2" onClick={handleAddExperience}>Add</button>
+                                <button type="submit" className="btn-2" onClick={props.handleAddExperience}>Add</button>
                             </div>
                         </div>
                     </div>)}
-                    {showEduModal && (<div className="overlay">
+                    {props.showEduModal && (<div className="overlay">
                         <div className="edit-modal">
                             <div className="modal-header">
                                 <h3>Add Education</h3>
-                                <i className='bx bx-x' onClick={() => setShowEduModal(false)}></i>
+                                <i className='bx bx-x' onClick={() => props.setShowEduModal(false)}></i>
                             </div>
                             <div className="modal-body">
                                 <form>
@@ -354,8 +286,8 @@ export default function SideBar(props)
                                             name="schoolName" 
                                             id="schoolName" 
                                             className="styled-input"
-                                            value={educationsFormData.schoolName}
-                                            onChange={handleEducationsFormChange} 
+                                            value={props.educationsFormData.schoolName}
+                                            onChange={props.handleEducationsFormChange} 
                                             required/>
                                     </div>
                                     <div className="form-group">
@@ -365,8 +297,8 @@ export default function SideBar(props)
                                             name="location" 
                                             id="location" 
                                             className="styled-input" 
-                                            value={educationsFormData.location}
-                                            onChange={handleEducationsFormChange}
+                                            value={props.educationsFormData.location}
+                                            onChange={props.handleEducationsFormChange}
                                             required/>
                                     </div>
                                     <div className="form-group">
@@ -376,8 +308,8 @@ export default function SideBar(props)
                                             name="startDate" 
                                             id="startDate"
                                             className="styled-input" 
-                                            value={educationsFormData.startDate}
-                                            onChange={handleEducationsFormChange}
+                                            value={props.educationsFormData.startDate}
+                                            onChange={props.handleEducationsFormChange}
                                             required/>
                                     </div>
                                     <div className="form-group">
@@ -387,8 +319,8 @@ export default function SideBar(props)
                                             name="endDate" 
                                             id="endDate" 
                                             className="styled-input" 
-                                            value={educationsFormData.endDate}
-                                            onChange={handleEducationsFormChange}
+                                            value={props.educationsFormData.endDate}
+                                            onChange={props.handleEducationsFormChange}
                                             required/>
                                     </div>
                                     <div className="form-group">
@@ -397,15 +329,15 @@ export default function SideBar(props)
                                             name="description" 
                                             id="description" 
                                             className="styled-input" 
-                                            value={educationsFormData.description}
-                                            onChange={handleEducationsFormChange}
+                                            value={props.educationsFormData.description}
+                                            onChange={props.handleEducationsFormChange}
                                             required>
                                         </textarea>
                                     </div>
                                 </form>
                             </div>
                             <div className="modal-footer">
-                                <button type="submit" className="btn-2" onClick={handleAddEducation}>Add</button>
+                                <button type="submit" className="btn-2" onClick={props.handleAddEducation}>Add</button>
                             </div>
                         </div>
                     </div>)}

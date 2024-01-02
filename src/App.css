@@ -499,6 +499,9 @@ header .image-text .header-text {
 
 .resume-exp-box-title p {
   margin: 0 0.5rem;
+  font-style: italic;
+  color: var(--sideBar-color)!important;
+  
 }
 
 .resume-exp-box p:nth-child(2) {

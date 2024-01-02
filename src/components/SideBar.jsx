@@ -162,7 +162,6 @@ export default function SideBar(props)
                                                     <p>{experience.jobTitle.slice(0,5)}...</p>
                                                 </div>
                                                 <div className="control-btns">
-                                                    <button className="btn">Edit</button>
                                                     <button className="btn" onClick={() => props.handleRemoveExperience(index) }>Remove</button>
                                                 </div>
                                             </div>
@@ -189,7 +188,6 @@ export default function SideBar(props)
                                                     <p>{education.schoolName.slice(0,5)}...</p>
                                                 </div>
                                                 <div className="control-btns">
-                                                    <button className="btn">Edit</button>
                                                     <button className="btn" onClick={() => props.handleRemoveEducation(index)}>Remove</button>
                                                 </div>
                                             </div>

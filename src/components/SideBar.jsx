@@ -252,23 +252,25 @@ export default function SideBar(props)
                                     <div className="form-group">
                                         <label htmlFor="startDate">Start Date</label>
                                         <input 
-                                            type="date" 
+                                            type="text" 
                                             name="startDate" 
                                             id="startDate" 
                                             className="styled-input" 
                                             value={props.experienceFormData.startDate}
                                             onChange={props.handleExperienceFormChange}
+                                            placeholder="month, year"
                                             required/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="endDate">End Date</label>
                                         <input 
-                                            type="date" 
+                                            type="text" 
                                             name="endDate" 
                                             id="endDate" 
                                             className="styled-input" 
                                             value={props.experienceFormData.endDate}
                                             onChange={props.handleExperienceFormChange}
+                                            placeholder="month, year"
                                             required/>
                                     </div>
                                     <div className="form-group">
@@ -323,23 +325,25 @@ export default function SideBar(props)
                                     <div className="form-group">
                                         <label htmlFor="startDate">Start Date</label>
                                         <input 
-                                            type="date" 
+                                            type="text" 
                                             name="startDate" 
                                             id="startDate"
                                             className="styled-input" 
                                             value={props.educationsFormData.startDate}
                                             onChange={props.handleEducationsFormChange}
+                                            placeholder="month, year"
                                             required/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="endDate">End Date</label>
                                         <input 
-                                            type="date" 
+                                            type="text" 
                                             name="endDate" 
                                             id="endDate" 
                                             className="styled-input" 
                                             value={props.educationsFormData.endDate}
                                             onChange={props.handleEducationsFormChange}
+                                            placeholder="month, year"
                                             required/>
                                     </div>
                                     <div className="form-group">

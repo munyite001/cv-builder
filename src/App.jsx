@@ -40,14 +40,7 @@ const handlePersonalInfoChange = (e) => {
   }))
 }
 
-const [experiences, setExperiences] = useState([{
-  jobTitle: "Web Developer",
-  company: "ABC",
-  startDate: "2023 January",
-  endDate: "2023 December",
-  description: "Worked as a frontend Developer"
-},
-]);
+const [experiences, setExperiences] = useState([]);
 
 const [experienceFormData, setExperienceFormData] = useState({
     jobTitle: "",

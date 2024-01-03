@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import logo from "../assets/logo.png";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 export default function SideBar(props)
 {
@@ -39,6 +41,19 @@ export default function SideBar(props)
         setOpenNavLink4(!openNavLink4);
     }
 
+    const downloadPDF = () => {
+        const input = document.querySelector('.resume-document');
+        html2canvas(input)
+        .then((canvas) => {
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297); //  A4 size: 210mm * 297mm
+            pdf.save('resume.pdf');
+        })
+        .catch((error) => {
+            console.log("Error generating pdf: ", error);
+        })
+    }
+
     return(
         <nav className={toggle ? "sidebar close" : "sidebar"}>
             <header>
@@ -51,7 +66,6 @@ export default function SideBar(props)
                         <span className="name">
                             Resume Builder
                         </span>
-                        {/* Will add more details later on */}
                     </div>
                 </div>
 
@@ -179,7 +193,6 @@ export default function SideBar(props)
                                     <i className='bx bxs-chevron-down icon-2' onClick={handleOpenNavLink4}></i>
                                 </div>
                                 <div className="info-section">
-                                    {/* Create a modal for adding education */}
                                     {props.educations.map((education, index) => {
                                         return(
                                             <div className="info-box" key={index}>
@@ -194,6 +207,14 @@ export default function SideBar(props)
                                         )
                                     })}
                                     <button className="btn-2" onClick={() => props.setShowEduModal(true)}>Add</button>
+                                </div>
+                            </a>
+                        </li>
+                        <li className="nav-link download-btn" onClick={downloadPDF}>
+                            <a href="#">
+                                <div className="details">
+                                    <i className='bx bxs-download icon'></i>
+                                    <span className="text nav-text">Download</span>
                                 </div>
                             </a>
                         </li>

@@ -507,3 +507,11 @@ header .image-text .header-text {
 .resume-exp-box p:nth-child(2) {
   color: rgba(0,0,0,0.5);
 }
+
+
+.download-btn {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+}

@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import jsPDF from "jspdf";
@@ -6,7 +6,7 @@ import html2canvas from "html2canvas";
 
 export default function SideBar(props)
 {
-
+    //eslint-disable-next-line
     const {name, role, phone, address, email} = props.personalInfo;
     const {skills} = props;
     
@@ -368,4 +368,32 @@ export default function SideBar(props)
             </div>
         </nav>
     )
+}
+
+SideBar.propTypes = {
+    name: PropTypes.string,
+    role: PropTypes.string,
+    phone: PropTypes.string,
+    address: PropTypes.string,
+    email: PropTypes.string,
+    skills: PropTypes.array,
+    experiences: PropTypes.array,
+    educations: PropTypes.array,
+    experienceFormData: PropTypes.object,
+    educationsFormData: PropTypes.object,
+    handleChange: PropTypes.func,
+    handleSkillChange: PropTypes.func,
+    handleRemoveSkill: PropTypes.func,
+    handleAddSkill: PropTypes.func,
+    handleRemoveExperience: PropTypes.func,
+    handleRemoveEducation: PropTypes.func,
+    handleExperienceFormChange: PropTypes.func,
+    handleEducationsFormChange: PropTypes.func,
+    handleAddExperience: PropTypes.func,
+    handleAddEducation: PropTypes.func,
+    showExpModal: PropTypes.bool,
+    showEduModal: PropTypes.bool,
+    setShowExpModal: PropTypes.func,
+    setShowEduModal: PropTypes.func
+
 }
